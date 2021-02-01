@@ -1,9 +1,11 @@
+// http://aperiodic.net/phil/scala/s-99/
+
 object Lists {
-  def last(l: List[Int]): Int = {
+  def last(l: List[Int]): Int = { // p0
     return l.last
   }
 
-  def penultimate(l: List[Int]): Option[Int] = {
+  def penultimate(l: List[Int]): Option[Int] = { // p1
     if (l.size < 2) {
       return None
     }
