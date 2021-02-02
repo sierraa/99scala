@@ -34,8 +34,29 @@ object Lists {
     return result.toList
   }
 
+  def pack(l: List[Int]): List[List[Int]] = {
+    if (l.isEmpty) List(List())
+    else {
+      val (packed, next) = l span {
+        _ == l.head
+      }
+      if (next == Nil) List(packed)
+      else packed :: pack(next)
+    }
+  }
+
+  def encode(l: List[Symbol]): List[(Int, Symbol)] = {
+    if (l.isEmpty) List(List())
+    val (packed, next) = l span {
+      _ == l.head
+    }
+    val encoded = (packed.size, packed.head)
+    if (next == Nil) List(encoded)
+    else encoded :: encode(next)
+  }
+
   def main(args: Array[String]): Unit = {
-    val ls = List(1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 3)
-    println(compress(ls))
+    val ls = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+    println(encode(ls))
   }
 }
